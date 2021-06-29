@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
+    <channel>
+        <title>博客园-xxx</title>
+        <link>https://www.cnblogs.com/xxx</link>
+        <description>xxxx</description>
+        <language>zh-cn</language>
+        <lastBuildDate>Mon, 28 Jun 2021 12:48:06 GMT</lastBuildDate>
+        <pubDate>Mon, 28 Jun 2021 12:48:06 GMT</pubDate>
+        <ttl>60</ttl>
+        <item>
+            <title>文章3</title>
+            <link>http://www.baidu.com</link>
+            <dc:creator>作者名称</dc:creator>
+            <author>作者名称</author>
+            <pubDate>Mon, 21 Jun 2021 14:01:00 GMT</pubDate>
+            <guid>http://www.baidu.com</guid>
+            <description><![CDATA[这里是正文信息]]></description>
+        </item>
+        <item>
+            <title>文章1</title>
+            <link>http://www.baidu.com</link>
+            <dc:creator>作者名称</dc:creator>
+            <author>作者名称</author>
+            <pubDate>Mon, 21 Jun 2021 14:01:00 GMT</pubDate>
+            <guid>http://www.baidu.com</guid>
+            <description><![CDATA[这里是正文信息]]></description>
+        </item>
+        <item>
+            <title>文章2</title>
+            <link>http://www.baidu.com</link>
+            <dc:creator>作者名称</dc:creator>
+            <author>作者名称</author>
+            <pubDate>Mon, 21 Jun 2021 14:01:00 GMT</pubDate>
+            <guid>http://www.baidu.com</guid>
+            <description><![CDATA[这里是正文信息]]></description>
+        </item>
+    </channel>
+</rss>
