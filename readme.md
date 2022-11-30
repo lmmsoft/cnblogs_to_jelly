@@ -8,3 +8,4 @@
 3. 运行代码，在输出目录里找到导出的【日期-标题.html】文件列表
 
 - 代码比较乱，定义了一些类都没用到，大家凑合用吧
+- 导出效果可参考: https://github.com/lmmsoft/cnblogs_to_jelly/blob/master/2011-01-22-%E6%88%91%E6%9D%A5%E5%88%B0%E5%8D%9A%E5%AE%A2%E5%9B%AD%E4%BA%86%EF%BC%81.html
