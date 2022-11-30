@@ -1,4 +1,4 @@
-# 博客园文章导出到jekky工具
+# 博客园文章导出到jelly工具
 
 - 优化了这篇文章里的代码 https://www.cnblogs.com/greyzeng/p/14949545.html
 - 使用方法：
