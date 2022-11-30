@@ -6,7 +6,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.dom4j.tree.BackedList;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,12 +17,9 @@ import java.util.*;
  * 博客园xml转md文档
  */
 public class App {
-    // 指定你要导出的目录
-    static final String output_folder_path = ".";
-    //    static final String input_file_path = "sample.xml";CNBlogs_BlogBackup_131_201101_202211.xml
-    static final String input_file_path = "CNBlogs_BlogBackup_131_201101_202211.xml";
 
-//    static final String input_file_path = "un_estate.xml";
+    static final String input_file_path = "CNBlogs_BlogBackup_131_201101_202211.xml";
+    static final String output_folder_path = ".";// 指定你要导出的目录
 
     public static void main(String[] args) throws DocumentException, IOException, ParseException {
         SAXReader reader = new SAXReader();
@@ -32,8 +28,6 @@ public class App {
 
         Document document = reader.read(url);
         Element root = document.getRootElement();
-
-//        Blog blog = getPostList(root);
 
         saveOldMarkdown(root);
     }
@@ -52,7 +46,7 @@ public class App {
 
             String meta = "---"
                     + "\n" + "title: '" + title + "'"
-                    + "\n" + "date: " + formatDatetime(pubDate)
+                    + "\n" + "date: " + getDatetimeString(pubDate)
                     + "\nlayout: post"
                     + "\npublished: true"
                     + "\ncomments: true"
@@ -63,94 +57,30 @@ public class App {
             String description = item.element("description").getText();
 
             saveOuputFile(
-                    getFileNameString(pubDate)+getFileName(title),
+                    getFileNameString(pubDate) + getFileName(title),
                     meta + description
             );
         }
     }
 
-    public static Blog getPostList(Element root) {
-        Blog blog = new Blog();
-        blog.postList = new ArrayList<Post>();
-
-        String rootName = root.getName();
-        BackedList postList;
-        switch (rootName) {
-            case "rss":
-                System.out.println("rss");
-                Element channel = root.element("channel");
-
-                blog.title = channel.elementText("title");
-                blog.url = channel.elementText("link");
-
-                for (Iterator<Element> it = channel.elementIterator("item"); it.hasNext(); ) {
-                    Element item = it.next();
-
-                    Post post = new Post();
-                    post.title = item.element("title").getTextTrim();
-                    post.link = item.element("link").getTextTrim();
-                    post.content = item.element("description").getText();
-
-                    blog.postList.add(post);
-                }
-                break;
-            case "feed":
-                System.out.println("feed");
-
-                blog.title = root.elementText("title");
-                blog.url = root.element("author").elementText("uri");
-
-                for (Iterator<Element> it = root.elementIterator("entry"); it.hasNext(); ) {
-                    Element e = it.next();
-
-                    Post post = new Post();
-                    post.title = e.element("title").getTextTrim();
-                    post.link = e.element("link").getTextTrim();
-                    post.content = e.element("content").getText();
-
-                    String published = e.elementText("published");
-                    String dt2 = formatDatetime(published);
-
-                    blog.postList.add(post);
-                }
-                break;
-            default:
-                break;
-        }
-        return blog;
-    }
-
     // 替换windows中非法文件名
     public static String getFileName(String invalidTitle) {
-        return invalidTitle.replaceAll("[/\\\\:*?<>|]", "") + ".html";
+        return invalidTitle.replaceAll("[/\\\\:*?<>|]", "") + ".html";//cnblogs实际转出的是html的格式，如果是md, 可以改成.md
     }
 
     public static void saveOuputFile(String filename, String content) throws IOException {
         File file = new File(output_folder_path, filename);
-//        file.deleteOnExit();
+//        file.deleteOnExit();// 删除存在的文件
         file.createNewFile();
         FileUtil.appendString(content, file, "UTF-8");
         System.out.println("已保存:" + file.getAbsolutePath());
     }
 
-    static String formatDatetime(String stringDate) {
+    static String getDatetimeString(String stringDate) {
         return DateUtil.format(new Date(stringDate), "yyyy-MM-dd HH:mm:ss");
     }
 
     static String getFileNameString(String stringDate) {
         return DateUtil.format(new Date(stringDate), "yyyy-MM-dd-");
     }
-}
-
-class Blog {
-    public String title;
-    public String url;
-    public List<Post> postList;
-}
-
-class Post {
-    public String title;
-    public String link;
-    public String published;
-    public String content;
 }

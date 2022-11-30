@@ -32,3 +32,5 @@ build/
 /.gradle/
 /bin/
 /out/
+
+.DS_Store
